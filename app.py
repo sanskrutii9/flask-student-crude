@@ -6,7 +6,13 @@ from models import db, Student
 app = Flask(__name__)
 app.config.from_object(Config)
 db.init_app(app)
+# Ensure absolute path to the directory
+basedir = os.path.abspath(os.path.dirname(__file__))
+instance_path = os.path.join(basedir, 'instance')
+os.makedirs(instance_path, exist_ok=True)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(instance_path, 'app.db')}"
+db = SQLAlchemy(app)
 # Create database tables automatically when app starts
 with app.app_context():
     db.create_all()
