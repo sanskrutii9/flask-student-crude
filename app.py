@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 from config import Config
 
-
+from flask_sqlalchemy import SQLAlchemy
 from models import db, Student
 
 app = Flask(__name__)
